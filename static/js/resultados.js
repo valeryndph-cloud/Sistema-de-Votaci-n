@@ -1,58 +1,35 @@
-const resultados = [
-    {
-        nombre: "Juan Pérez",
-        partido: "Partido A",
-        votos: 25
-    },
-    {
-        nombre: "María López",
-        partido: "Partido B",
-        votos: 18
-    },
-    {
-        nombre: "Carlos Ruiz",
-        partido: "Partido C",
-        votos: 12
-    }
-];
+console.log("Módulo de resultados cargado");
 
+// Buscar candidatos en la tabla
+function filtrarResultados() {
+    const filtro = document.getElementById("filtro").value.toLowerCase();
+    const filas = document.querySelectorAll("#tablaResultados tr");
 
-const totalVotos = resultados.reduce(
-    (total, candidato) => total + candidato.votos,
-    0
-);
+    filas.forEach(function (fila) {
+        const candidato = fila.cells[0].textContent.toLowerCase();
+        const partido = fila.cells[1].textContent.toLowerCase();
 
+        if (candidato.includes(filtro) || partido.includes(filtro)) {
+            fila.style.display = "";
+        } else {
+            fila.style.display = "none";
+        }
+    });
+}
 
-const tabla = document.getElementById("tablaResultados");
+// Ordenar candidatos de mayor a menor cantidad de votos
+function ordenarPorVotos() {
+    const tabla = document.getElementById("tablaResultados");
+    const filas = Array.from(tabla.querySelectorAll("tr"));
 
-tabla.innerHTML = "";
+    filas.sort(function (a, b) {
+        const votosA = parseInt(a.cells[2].textContent);
+        const votosB = parseInt(b.cells[2].textContent);
 
+        return votosB - votosA;
+    });
 
-resultados.forEach(candidato => {
-
-    const porcentaje = ((candidato.votos / totalVotos) * 100).toFixed(2);
-
-    const fila = document.createElement("tr");
-
-    fila.innerHTML = `
-        <td>${candidato.nombre}</td>
-        <td>${candidato.partido}</td>
-        <td>${candidato.votos}</td>
-        <td>${porcentaje}%</td>
-    `;
-
-    tabla.appendChild(fila);
-
-});
-
-
-document.getElementById("totalResultados").textContent = totalVotos;
-
-
-const ganador = resultados.reduce(
-    (mayor, candidato) =>
-        candidato.votos > mayor.votos ? candidato : mayor
-);
-
-
-document.getElementById("ganador").textContent = ganador.nombre;
+    filas.forEach(function (fila) {
+        tabla.appendChild(fila);
+    });
+}

@@ -45,7 +45,19 @@
 
             <h2>Resultados por candidato</h2>
 
-            <table>
+            <input
+    type="text"
+    id="filtro"
+    placeholder="Buscar candidato o partido..."
+    onkeyup="filtrarResultados()"
+>
+
+
+<button id="ordenarVotos" onclick="ordenarPorVotos()">
+    Ordenar por votos
+</button>
+
+<table>
 
                 <thead>
 
@@ -61,28 +73,27 @@
 
                 <tbody id="tablaResultados">
 
-                    <tr>
-                        <td>Juan Pérez</td>
-                        <td>Partido A</td>
-                        <td>25</td>
-                        <td>45.45%</td>
-                    </tr>
+    {% for candidato in candidatos %}
 
-                    <tr>
-                        <td>María López</td>
-                        <td>Partido B</td>
-                        <td>18</td>
-                        <td>32.73%</td>
-                    </tr>
+    <tr>
 
-                    <tr>
-                        <td>Carlos Ruiz</td>
-                        <td>Partido C</td>
-                        <td>12</td>
-                        <td>21.82%</td>
-                    </tr>
+        <td>{{ candidato.nombre }}</td>
 
-                </tbody>
+        <td>{{ candidato.partido }}</td>
+
+        <td>{{ candidato.votos }}</td>
+
+        <td>
+            {{ "%.2f"|format((candidato.votos / total_votos) * 100) }}%
+        </td>
+
+    </tr>
+
+        {% endfor %}
+
+</tbody>
+ 
+
 
             </table>
 
@@ -91,8 +102,10 @@
 
                 <h2>🏆 Ganador</h2>
 
-                <p id="ganador">
-                    Juan Pérez
+                
+                   <p id="ganador">
+                {{ ganador.nombre }}
+                   
                 </p>
 
             </div>
@@ -103,8 +116,8 @@
                 <h3>Total de votos</h3>
 
                 <p id="totalResultados">
-                    55
-                </p>
+    {{ total_votos }}
+</p>
 
             </div>
 
