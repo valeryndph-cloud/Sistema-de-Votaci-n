@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Panel de Administrador</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            🗳️ Sistema de Votación
+        </div>
+
+        <nav>
+            <a href="/admin">Inicio</a>
+            <a href="/resultados">Resultados</a>
+            <a href="/">Cerrar sesión</a>
+        </nav>
+    </header>
+
+
+    <main class="container">
+
+        <section class="welcome">
+            <h1>Panel de Administrador</h1>
+
+            <p>
+                Bienvenido al panel de administración del sistema de votación.
+            </p>
+        </section>
+
+
+        <section class="stats">
+
+            <div class="card">
+                <h3>Usuarios registrados</h3>
+                <p <p id="totalUsuarios">{{ total_usuarios }}</p></p>
+            </div>
+
+            <div class="card">
+                <h3>Votos realizados</h3>
+                <p id="totalVotos">{{ total_votos }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Votos pendientes</h3>
+                <p id="votosPendientes">{{ votos_pendientes }}</p>
+            </div>
+
+        </section>
+
+
+        <section class="actions">
+
+            <h2>Administración</h2>
+
+            <div class="buttons">
+
+                <a href="/resultados" class="button">
+                    Ver resultados
+                </a>
+
+                <a href="/candidatos" class="button">
+                    Ver candidatos
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>Sistema de Votación Simple © 2026</p>
+    </footer>
+
+</body>
+</html>

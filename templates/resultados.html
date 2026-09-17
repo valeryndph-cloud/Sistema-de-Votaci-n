@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resultados de Votación</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+            🗳️ Sistema de Votación
+        </div>
+
+        <nav>
+            <a href="/admin">Administrador</a>
+            <a href="/resultados">Resultados</a>
+            <a href="/">Cerrar sesión</a>
+        </nav>
+
+    </header>
+
+
+    <main class="container">
+
+        <section class="welcome">
+
+            <h1>Resultados de la votación</h1>
+
+            <p>
+                Consulta los resultados actuales de la votación.
+            </p>
+
+        </section>
+
+
+        <section class="actions">
+
+            <h2>Resultados por candidato</h2>
+
+            <input
+    type="text"
+    id="filtro"
+    placeholder="Buscar candidato o partido..."
+    onkeyup="filtrarResultados()"
+>
+
+
+<button id="ordenarVotos" onclick="ordenarPorVotos()">
+    Ordenar por votos
+</button>
+
+<table>
+
+                <thead>
+
+                    <tr>
+                        <th>Candidato</th>
+                        <th>Partido</th>
+                        <th>Votos</th>
+                        <th>Porcentaje</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tablaResultados">
+
+    {% for candidato in candidatos %}
+
+    <tr>
+
+        <td>{{ candidato.nombre }}</td>
+
+        <td>{{ candidato.partido }}</td>
+
+        <td>{{ candidato.votos }}</td>
+
+        <td>
+            {{ "%.2f"|format((candidato.votos / total_votos) * 100) }}%
+        </td>
+
+    </tr>
+
+        {% endfor %}
+
+</tbody>
+ 
+
+
+            </table>
+
+
+            <div class="winner">
+
+                <h2>🏆 Ganador</h2>
+
+                
+                   <p id="ganador">
+                {{ ganador.nombre }}
+                   
+                </p>
+
+            </div>
+
+
+            <div class="total">
+
+                <h3>Total de votos</h3>
+
+                <p id="totalResultados">
+    {{ total_votos }}
+</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Sistema de Votación Simple © 2026
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/resultados.js') }}"></script>
+
+</body>
+</html>
