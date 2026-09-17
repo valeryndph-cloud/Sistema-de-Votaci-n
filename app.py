@@ -30,3 +30,10 @@ def votar(candidato_id):
 
 if __name__ == "__main__":
 	app.run(debug=True)
+
+# Ejemplo básico para identificar al ganador en app.py
+def obtener_ganador(votos):
+    if not votos:
+        votos = {"Opción A": 0, "Opción B": 0}
+    ganador = max(votos, key=votos.get)
+    return ganador
