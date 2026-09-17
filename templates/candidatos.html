@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidatos | Sistema de votación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='votacion.css') }}">
+</head>
+<body>
+    <main class="contenedor">
+        <header class="encabezado">
+            <p class="etiqueta">Elección estudiantil</p>
+            <h1>Elige tu candidato</h1>
+            <p class="introduccion">Conoce las propuestas y selecciona una opción para votar.</p>
+        </header>
+
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% for categoria, mensaje in mensajes %}
+                <div class="alerta {{ categoria }}" role="status">{{ mensaje }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <section class="candidatos" aria-label="Lista de candidatos">
+            {% for candidato in candidatos %}
+                <article class="tarjeta-candidato">
+                    <div class="avatar" aria-hidden="true">{{ candidato.nombre[0] }}</div>
+                    <div class="datos-candidato">
+                        <p class="numero">Candidato {{ "%02d"|format(candidato.id) }}</p>
+                        <h2>{{ candidato.nombre }}</h2>
+                        <p>{{ candidato.propuesta }}</p>
+                    </div>
+                    <a class="boton boton-votar" href="{{ url_for('votar', candidato_id=candidato.id) }}">
+                        Votar <span aria-hidden="true">&#8594;</span>
+                    </a>
+                </article>
+            {% endfor %}
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='votacion.js') }}"></script>
+</body>
+</html>

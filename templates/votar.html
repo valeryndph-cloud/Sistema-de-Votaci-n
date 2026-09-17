@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar voto | Sistema de votación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='votacion.css') }}">
+</head>
+<body>
+    <main class="contenedor contenedor-confirmacion">
+        <a class="volver" href="{{ url_for('candidatos') }}">&#8592; Volver a candidatos</a>
+        <section class="confirmacion">
+            <p class="etiqueta">Confirmación de voto</p>
+            <div class="avatar avatar-grande" aria-hidden="true">{{ candidato.nombre[0] }}</div>
+            <h1>Vas a votar por {{ candidato.nombre }}</h1>
+            <p class="introduccion">{{ candidato.propuesta }}</p>
+            <form method="post" class="formulario-voto" data-formulario-voto>
+                <label for="documento">Número de identificación</label>
+                <input id="documento" name="documento" type="text" required minlength="4"
+                       placeholder="Escribe tu identificación" autocomplete="off">
+                <p class="nota">Tu identificación se usará para validar el voto.</p>
+                <button class="boton boton-principal" type="submit">Confirmar voto</button>
+            </form>
+        </section>
+    </main>
+    <script src="{{ url_for('static', filename='votacion.js') }}"></script>
+</body>
+</html>
