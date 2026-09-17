@@ -1,0 +1,54 @@
+:root {
+    --fondo: #f5f1e8;
+    --texto: #17211b;
+    --secundario: #5d6a61;
+    --verde: #176b52;
+    --verde-claro: #d9eee4;
+    --borde: #d7ddd4;
+    --blanco: #fffdf8;
+    --sombra: 0 14px 35px rgba(32, 55, 41, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-width: 320px;
+    color: var(--texto);
+    background: radial-gradient(circle at 90% 0%, #dceee4 0, transparent 28rem), var(--fondo);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.contenedor { width: min(100% - 40px, 960px); margin: 0 auto; padding: 72px 0; }
+.encabezado { max-width: 620px; margin-bottom: 42px; }
+.etiqueta, .numero { color: var(--verde); font: 700 0.75rem/1.2 Arial, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; }
+h1 { margin: 12px 0; font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: 0.98; }
+h2 { margin: 6px 0 10px; font-size: 1.7rem; }
+.introduccion { color: var(--secundario); font-size: 1.15rem; line-height: 1.6; }
+.candidatos { display: grid; gap: 16px; }
+.tarjeta-candidato { display: flex; align-items: center; gap: 22px; padding: 24px; background: var(--blanco); border: 1px solid var(--borde); box-shadow: var(--sombra); }
+.avatar { display: grid; flex: 0 0 58px; width: 58px; height: 58px; place-items: center; border-radius: 50%; color: var(--verde); background: var(--verde-claro); font-size: 1.8rem; font-weight: 700; }
+.datos-candidato { flex: 1; }
+.datos-candidato p:last-child { margin: 0; color: var(--secundario); line-height: 1.4; }
+.numero { margin: 0; font-size: 0.68rem; }
+.boton { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 13px 18px; border: 0; color: var(--blanco); background: var(--verde); font: 700 0.9rem Arial, sans-serif; text-decoration: none; cursor: pointer; transition: transform 160ms ease, background 160ms ease; }
+.boton:hover { background: #0e503d; transform: translateY(-2px); }
+.alerta { margin: 0 0 22px; padding: 14px 18px; border-left: 4px solid var(--verde); background: var(--verde-claro); font-family: Arial, sans-serif; }
+.contenedor-confirmacion { max-width: 660px; }
+.volver { color: var(--verde); font: 700 0.9rem Arial, sans-serif; text-decoration: none; }
+.confirmacion { margin-top: 44px; padding: 42px; text-align: center; background: var(--blanco); border: 1px solid var(--borde); box-shadow: var(--sombra); }
+.avatar-grande { margin: 24px auto; width: 84px; height: 84px; font-size: 2.4rem; }
+.formulario-voto { max-width: 390px; margin: 30px auto 0; text-align: left; }
+.formulario-voto label { display: block; margin-bottom: 8px; font: 700 0.85rem Arial, sans-serif; }
+.formulario-voto input { width: 100%; padding: 14px; border: 1px solid var(--borde); background: #fff; font: 1rem Arial, sans-serif; }
+.formulario-voto input:focus { outline: 2px solid var(--verde); outline-offset: 2px; }
+.nota { color: var(--secundario); font: 0.78rem Arial, sans-serif; }
+.boton-principal { width: 100%; margin-top: 14px; }
+
+@media (max-width: 620px) {
+    .contenedor { width: min(100% - 28px, 960px); padding: 44px 0; }
+    .tarjeta-candidato { align-items: flex-start; flex-wrap: wrap; padding: 20px; }
+    .datos-candidato { min-width: calc(100% - 80px); }
+    .boton-votar { width: 100%; }
+    .confirmacion { padding: 28px 20px; }
+}
